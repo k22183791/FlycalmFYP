@@ -1,0 +1,508 @@
+import { colors } from "@/constants/colors";
+import type { BreathingHapticWeight } from "@/lib/breathingHaptics";
+
+export type Phase = {
+  w: string;
+  s: string;
+  d: number;
+  fill: boolean;
+  col: string;
+  next: string;
+  /** Tactile cue at the start of this phase (shared vocabulary app-wide). */
+  haptic: BreathingHapticWeight;
+};
+
+export type Exercise = {
+  tag: string;
+  name: string;
+  why: string;
+  safe: string;
+  info: string;
+  rounds: number;
+  phases: Phase[];
+};
+
+const COL_IN = colors.blue;
+const COL_OUT = colors.blueExhale;
+
+export const ROUTE: Record<string, Exercise> = {
+  "heart:gate": {
+    tag: "At the gate — racing heart",
+    name: "Alternate nostril breathing",
+    why: "Anticipatory anxiety on the tarmac raises heart rate before the flight even starts. Alternating nostrils balances both sides of the brain, lowers blood pressure, and creates calm from the inside out.",
+    safe: "Your body is reacting to anticipation, not danger. A racing heart before a flight is one of the most common experiences there is.",
+    info: "Your nose filters cabin air and slows your breath naturally. This technique keeps every breath nasal.",
+    rounds: 5,
+    phases: [
+      {
+        w: "Close right nostril",
+        s: "Breathe in through your left nostril only",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Switch coming",
+        haptic: "light",
+      },
+      {
+        w: "Hold",
+        s: "Both nostrils gently closed",
+        d: 2,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Close left nostril",
+        s: "Breathe out through your right nostril only",
+        d: 4,
+        fill: false,
+        col: COL_OUT,
+        next: "Switch coming",
+        haptic: "medium",
+      },
+      {
+        w: "Breathe in",
+        s: "Through your right nostril only",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Hold coming",
+        haptic: "light",
+      },
+      {
+        w: "Hold",
+        s: "Both nostrils gently closed",
+        d: 2,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Close right nostril",
+        s: "Breathe out through your left nostril only",
+        d: 4,
+        fill: false,
+        col: COL_OUT,
+        next: "Breathe in coming",
+        haptic: "medium",
+      },
+    ],
+  },
+  "shaky:takeoff": {
+    tag: "Take-off — shaky feeling",
+    name: "Box breathing 4-4-4-4",
+    why: "The plane's acceleration makes it feel out of control. Box breathing locks your mind onto a fixed internal rhythm — giving you something predictable to hold onto when the outside world isn't.",
+    safe: "The shaking you feel at take-off is the aircraft accelerating through air. It is completely normal and exactly what the plane is built to do.",
+    info: "Every breath through your nose slows the breath cycle naturally, which is exactly what box breathing needs.",
+    rounds: 4,
+    phases: [
+      {
+        w: "Breathe in",
+        s: "Slow and steady through your nose",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Hold coming",
+        haptic: "light",
+      },
+      {
+        w: "Hold",
+        s: "Stay still — shoulders relaxed",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Breathe out",
+        s: "Slow breath out through your mouth",
+        d: 4,
+        fill: false,
+        col: COL_OUT,
+        next: "Hold coming",
+        haptic: "medium",
+      },
+      {
+        w: "Hold",
+        s: "Empty — let it be quiet",
+        d: 4,
+        fill: false,
+        col: COL_OUT,
+        next: "Breathe in coming",
+        haptic: "heavy",
+      },
+    ],
+  },
+  "heart:smooth": {
+    tag: "Cruising — racing heart",
+    name: "4-7-8 breathing",
+    why: "Even in smooth air, elevated cabin CO₂ can make anxiety feel worse. The 8-second whoosh exhale actively flushes stale, CO₂-rich air from the bottom of the lungs.",
+    safe: "A racing heart during a calm flight is almost always the cabin environment affecting you, not the flight itself.",
+    info: "A longer exhale than inhale sends a direct signal to your nervous system that you are safe.",
+    rounds: 4,
+    phases: [
+      {
+        w: "Breathe in",
+        s: "Silent through your nose",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Hold coming",
+        haptic: "light",
+      },
+      {
+        w: "Hold",
+        s: "Keep it in — stay still",
+        d: 7,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Breathe out",
+        s: "Whoosh through your mouth — all of it",
+        d: 8,
+        fill: false,
+        col: COL_OUT,
+        next: "Breathe in coming",
+        haptic: "medium",
+      },
+    ],
+  },
+  "drops:turbulence": {
+    tag: "Turbulence — sudden drops",
+    name: "Physiological sigh",
+    why: "Sudden drops trigger an involuntary startle response. The double inhale pops the lung's air sacs fully open; the long exhale is the fastest way to reset the autonomic nervous system in real time.",
+    safe: "What you are feeling is air movement — invisible currents that pilots plan around every flight. The aircraft is built to handle far more than this.",
+    info: "The fear shrinks every time you face it. You are getting through it right now.",
+    rounds: 5,
+    phases: [
+      {
+        w: "Big breath in",
+        s: "Deep through your nose — fill up (about 3 seconds)",
+        d: 3,
+        fill: true,
+        col: COL_IN,
+        next: "Sip more air coming",
+        haptic: "light",
+      },
+      {
+        w: "Sip more in",
+        s: "Quick second top-up on top",
+        d: 1,
+        fill: true,
+        col: COL_IN,
+        next: "Long breathe out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Breathe out",
+        s: "Slow and full through your mouth — all of it",
+        d: 6,
+        fill: false,
+        col: COL_OUT,
+        next: "Big breath in coming",
+        haptic: "medium",
+      },
+    ],
+  },
+  "tense:landing": {
+    tag: "Landing — body feels tense",
+    name: "Belly breathing",
+    why: "Descending triggers an instinctive bracing response — muscles tighten and breathing moves up into the chest. Breathing into the belly re-engages the diaphragm and drops the heart rate.",
+    safe: "Descent and landing are the most controlled moments of the entire flight. The crew have done this thousands of times today alone.",
+    info: "Each flight you complete is proof you can do it. You are nearly there.",
+    rounds: 5,
+    phases: [
+      {
+        w: "Breathe in",
+        s: "Let your belly rise — not your chest",
+        d: 5,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "light",
+      },
+      {
+        w: "Breathe out",
+        s: "Belly falls slowly — let it all go",
+        d: 5,
+        fill: false,
+        col: COL_OUT,
+        next: "Breathe in coming",
+        haptic: "medium",
+      },
+    ],
+  },
+  "heart:landed": {
+    tag: "Landed — racing heart",
+    name: "3-3-3 quick calm",
+    why: "Waiting in crowded aisles after landing can trigger sudden claustrophobia. The short 3-second cycle is achievable even in a confined space when chest tightness makes longer holds feel impossible.",
+    safe: "You made it. The flight is over. What you are feeling now is residual adrenaline — it will settle within minutes.",
+    info: "You don't have to feel calm. You just have to get through. And you did.",
+    rounds: 6,
+    phases: [
+      {
+        w: "In",
+        s: "Short and gentle",
+        d: 3,
+        fill: true,
+        col: COL_IN,
+        next: "Hold coming",
+        haptic: "light",
+      },
+      {
+        w: "Hold",
+        s: "Just a moment",
+        d: 3,
+        fill: true,
+        col: COL_IN,
+        next: "Out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Out",
+        s: "Let it go",
+        d: 3,
+        fill: false,
+        col: COL_OUT,
+        next: "In coming",
+        haptic: "medium",
+      },
+    ],
+  },
+};
+
+export const FALLBACK: Record<string, Exercise> = {
+  gate: {
+    tag: "At the gate",
+    name: "Box breathing 4-4-4-4",
+    why: "Box breathing gives your mind a predictable rhythm to hold onto before the flight begins.",
+    safe: "Your body is reacting to anticipation, not danger.",
+    info: "Your nose filters cabin air and slows your breath naturally.",
+    rounds: 4,
+    phases: [
+      {
+        w: "Breathe in",
+        s: "Through your nose",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Hold coming",
+        haptic: "light",
+      },
+      {
+        w: "Hold",
+        s: "Stay still",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Breathe out",
+        s: "Through your mouth",
+        d: 4,
+        fill: false,
+        col: COL_OUT,
+        next: "Hold coming",
+        haptic: "medium",
+      },
+      {
+        w: "Hold",
+        s: "Empty — rest here",
+        d: 4,
+        fill: false,
+        col: COL_OUT,
+        next: "Breathe in coming",
+        haptic: "heavy",
+      },
+    ],
+  },
+  takeoff: {
+    tag: "Take-off",
+    name: "Box breathing 4-4-4-4",
+    why: "Keeps your mind on a steady internal rhythm during the loudest, most disorienting part of the flight.",
+    safe: "Everything you are hearing and feeling is normal.",
+    info: "Breathe through your nose throughout.",
+    rounds: 4,
+    phases: [
+      {
+        w: "Breathe in",
+        s: "Through your nose",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Hold coming",
+        haptic: "light",
+      },
+      {
+        w: "Hold",
+        s: "Stay still",
+        d: 4,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Breathe out",
+        s: "Through your mouth",
+        d: 4,
+        fill: false,
+        col: COL_OUT,
+        next: "Hold coming",
+        haptic: "medium",
+      },
+      {
+        w: "Hold",
+        s: "Empty — rest here",
+        d: 4,
+        fill: false,
+        col: COL_OUT,
+        next: "Breathe in coming",
+        haptic: "heavy",
+      },
+    ],
+  },
+  smooth: {
+    tag: "Cruising",
+    name: "Coherent breathing 5.5–5.5",
+    why: "5.5 breaths per minute is the most efficient rhythm for the body — balancing oxygen and CO₂ perfectly.",
+    safe: "You are cruising safely.",
+    info: "A longer exhale than inhale signals your nervous system you are safe.",
+    rounds: 6,
+    phases: [
+      {
+        w: "Breathe in",
+        s: "Gentle wave through your nose",
+        d: 5.5,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "light",
+      },
+      {
+        w: "Breathe out",
+        s: "Same pace out — continuous wave",
+        d: 5.5,
+        fill: false,
+        col: COL_OUT,
+        next: "Breathe in coming",
+        haptic: "medium",
+      },
+    ],
+  },
+  turbulence: {
+    tag: "Turbulence",
+    name: "Physiological sigh",
+    why: "The fastest reset for the startle response.",
+    safe: "The aircraft is built for this.",
+    info: "The fear shrinks every time you face it.",
+    rounds: 5,
+    phases: [
+      {
+        w: "Big breath in",
+        s: "Deep through your nose — fill up (about 3 seconds)",
+        d: 3,
+        fill: true,
+        col: COL_IN,
+        next: "Sip more coming",
+        haptic: "light",
+      },
+      {
+        w: "Sip more in",
+        s: "Quick second top-up",
+        d: 1,
+        fill: true,
+        col: COL_IN,
+        next: "Long breathe out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Breathe out",
+        s: "Slow and full — all of it",
+        d: 6,
+        fill: false,
+        col: COL_OUT,
+        next: "Big breath in coming",
+        haptic: "medium",
+      },
+    ],
+  },
+  landing: {
+    tag: "Landing",
+    name: "Belly breathing",
+    why: "Counters the instinctive bracing and chest breathing of descent.",
+    safe: "Descent is the most controlled part of the flight.",
+    info: "Each flight you complete is proof you can do it.",
+    rounds: 5,
+    phases: [
+      {
+        w: "Breathe in",
+        s: "Let your belly rise",
+        d: 5,
+        fill: true,
+        col: COL_IN,
+        next: "Breathe out coming",
+        haptic: "light",
+      },
+      {
+        w: "Breathe out",
+        s: "Belly falls — let it all go",
+        d: 5,
+        fill: false,
+        col: COL_OUT,
+        next: "Breathe in coming",
+        haptic: "medium",
+      },
+    ],
+  },
+  landed: {
+    tag: "Landed",
+    name: "3-3-3 quick calm",
+    why: "Short cycle for confined spaces when anxiety is still high.",
+    safe: "The flight is over. You did it.",
+    info: "You don't have to feel calm. You just have to get through.",
+    rounds: 6,
+    phases: [
+      {
+        w: "In",
+        s: "Short and gentle",
+        d: 3,
+        fill: true,
+        col: COL_IN,
+        next: "Hold coming",
+        haptic: "light",
+      },
+      {
+        w: "Hold",
+        s: "Just a moment",
+        d: 3,
+        fill: true,
+        col: COL_IN,
+        next: "Out coming",
+        haptic: "heavy",
+      },
+      {
+        w: "Out",
+        s: "Let it go",
+        d: 3,
+        fill: false,
+        col: COL_OUT,
+        next: "In coming",
+        haptic: "medium",
+      },
+    ],
+  },
+};
+
+export function resolveExercise(symptom?: string, phase?: string): Exercise {
+  const key = `${symptom}:${phase}`;
+  return ROUTE[key] || FALLBACK[phase ?? ""] || FALLBACK.smooth;
+}
