@@ -22,6 +22,8 @@ type AccessibilityPreferencesContextValue = {
   setTextSize: (value: TextSizeOption) => Promise<void>;
   textScale: number;
   ready: boolean;
+  /** Call after clearing AsyncStorage so UI matches default persisted values. */
+  resetPreferencesToDefaults: () => void;
 };
 
 const AccessibilityPreferencesContext =
@@ -61,6 +63,11 @@ export function AccessibilityPreferencesProvider({
     await saveTextSize(value);
   }, []);
 
+  const resetPreferencesToDefaults = useCallback(() => {
+    setHighContrastState(false);
+    setTextSizeState(DEFAULT_TEXT_SIZE);
+  }, []);
+
   const textScale = useMemo(() => textSizeToScale(textSize), [textSize]);
 
   const value = useMemo(
@@ -71,8 +78,17 @@ export function AccessibilityPreferencesProvider({
       setTextSize,
       textScale,
       ready,
+      resetPreferencesToDefaults,
     }),
-    [highContrast, setHighContrast, textSize, setTextSize, textScale, ready],
+    [
+      highContrast,
+      setHighContrast,
+      textSize,
+      setTextSize,
+      textScale,
+      ready,
+      resetPreferencesToDefaults,
+    ],
   );
 
   return (
