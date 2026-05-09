@@ -19,7 +19,7 @@ The exercise recommendations are informed by published research on CO₂ regulat
 - Breathing technique timer with haptic feedback
 - Grounding techniques and reassurance content
 - One-time Welcome screen on first launch (controlled via AsyncStorage)
-- Fully offline — no network requests, no backend, no user accounts
+- Fully offline - no network requests, no backend, no user accounts
 - Persistent state managed locally via AsyncStorage
 
 ---
