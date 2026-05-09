@@ -6,7 +6,7 @@ A mobile application for managing flight anxiety through evidence-based breathin
 
 ## Overview
 
-FlyCalm helps passengers manage flight anxiety by guiding them through breathing and grounding interventions tailored to their current symptoms and flight phase. The app is fully offline — no internet connection or account is required.
+FlyCalm helps passengers manage flight anxiety by guiding them through breathing and grounding interventions tailored to their current symptoms and flight phase. The app is fully offline - no internet connection or account is required.
 
 The exercise recommendations are informed by published research on CO₂ regulation and respiratory physiology. Elevated cabin CO₂ levels are associated with increased anxiety symptoms; slow, controlled breathing techniques counteract this by reducing CO₂ sensitivity. This science is embedded in the educational content and the rationale provided for each exercise.
 
@@ -77,7 +77,7 @@ Scan the QR code with Expo Go on Android.
 
 ## Usability Testing
 
-The app was evaluated through usability testing with participants drawn from the target user group. Participants were asked to navigate the app independently and complete a breathing exercise from start to finish. Results were assessed using the System Usability Scale (SUS), achieving a score of 70, above the industry average of 68, validating the user-centred design approach.
+The app was evaluated through usability testing with participants drawn from the target user group. Participants were asked to navigate the app independently and complete a breathing exercise from start to finish. Results were assessed using the System Usability Scale (SUS).
 
 ---
 
